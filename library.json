@@ -1,0 +1,22 @@
+{
+    "name": "LibFile",
+    "version": "0.0.1",
+    "description": "",
+    "keywords": "LibFile, File, Secure, Semaphore, Json",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/eduautomatiza/LibFile.git"
+    },
+    "authors": [
+        {
+            "name": "Eduardo Guse",
+            "email": "eduautomatiza@yahoo.com.br",
+            "maintainer": true
+        }
+    ],
+    "license": "MIT",
+    "frameworks": "arduino",
+    "platforms": [
+        "esp32"
+    ]
+}
