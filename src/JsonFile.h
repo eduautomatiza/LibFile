@@ -10,6 +10,9 @@
  */
 #pragma once
 
+#if defined(__has_include)
+#if __has_include(<ArduinoJson.h>)
+
 #include <Arduino.h>
 #include <ArduinoJson.h>
 #include <SemaphoreFile.h>
@@ -31,3 +34,6 @@ class JsonFile : protected TransferRead<JsonDocument>,
   virtual bool transferWriteData(JsonDocument* from, File* to) override;
   virtual bool transferReadData(File* from, JsonDocument* to) override;
 };
+
+#endif
+#endif

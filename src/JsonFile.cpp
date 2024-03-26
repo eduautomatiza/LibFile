@@ -8,6 +8,9 @@
  * @copyright Copyright (c) 2024
  *
  */
+#if defined(__has_include)
+#if __has_include(<ArduinoJson.h>)
+
 #include "JsonFile.h"
 
 JsonFile::JsonFile(SemaphoreFile* file) : _file(file) {}
@@ -38,3 +41,6 @@ bool JsonFile::transferReadData(File* from, JsonDocument* to) {
   if (result != true) to->clear();
   return result;
 }
+
+#endif
+#endif
