@@ -21,7 +21,7 @@
  */
 class SemaphoreFile {
  public:
-  typedef enum { READ_FILE = 0, WRITE_FILE = 1 } operation_t;
+  enum operation_t { READ_FILE = 0, WRITE_FILE = 1 };
 
   SemaphoreFile(FS* fs, const char* path);
   ~SemaphoreFile();

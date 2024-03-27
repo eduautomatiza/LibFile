@@ -30,14 +30,13 @@ bool StringFile::fromFile(File* from, String* to) {
   bool result = false;
   if (to->reserve(from->size() + 1)) {
     uint8_t buffer[128];
-    while (true) {
-      size_t length = from->read(buffer, sizeof(buffer));
-      if (length)
-        to->concat(buffer, length);
-      else
-        break;
+    size_t length;
+    while ((length = from->read(buffer, sizeof(buffer)))) {
+      to->concat(buffer, length);
     }
-    result = true;
+    if (from->size() == to->length()) {
+      result = true;
+    }
   }
   return result;
 }

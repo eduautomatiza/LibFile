@@ -22,7 +22,6 @@ JsonDocument JsonFile::toJsonDocument(void) {
 }
 
 bool JsonFile::toFile(JsonDocument* from, File* to) {
-  ;
   bool result = false;
   serializeJson(*from, *to);
   result = true;
@@ -33,8 +32,9 @@ bool JsonFile::fromFile(File* from, JsonDocument* to) {
   bool result = false;
   if (deserializeJson(*to, *from) == DeserializationError::Ok) {
     result = true;
+  } else {
+    to->clear();
   }
-  if (result != true) to->clear();
   return result;
 }
 

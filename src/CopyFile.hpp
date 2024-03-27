@@ -22,7 +22,7 @@ class CopyFile {
     bool result = false;
     auto file = _file->open(operation);
     if (file) {
-      if (operation == SemaphoreFile::operation_t::WRITE_FILE) {
+      if (operation == SemaphoreFile::WRITE_FILE) {
         result = toFile(data, file);
       } else {
         result = fromFile(file, data);
@@ -32,11 +32,9 @@ class CopyFile {
     return result;
   }
 
-  bool load(T* to) { return copy(to, SemaphoreFile::operation_t::READ_FILE); }
+  bool load(T* to) { return copy(to, SemaphoreFile::READ_FILE); }
 
-  bool save(T* from) {
-    return copy(from, SemaphoreFile::operation_t::WRITE_FILE);
-  }
+  bool save(T* from) { return copy(from, SemaphoreFile::WRITE_FILE); }
 
   virtual bool fromFile(File* from, T* to) = 0;
   virtual bool toFile(T* from, File* to) = 0;
