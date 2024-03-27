@@ -13,15 +13,10 @@
 #include <Arduino.h>
 #include <SemaphoreFile.h>
 
-#include <TransferFile.hpp>
+#include <CopyFile.hpp>
 
-class ClientFile : protected TransferRead<Client> {
+class ClientFile : public CopyFile<Client> {
  public:
   explicit ClientFile(SemaphoreFile* file);
-
-  bool load(Client* content);
-
- private:
-  SemaphoreFile* _file;
-  virtual bool transferReadData(File* from, Client* to) override;
+  bool fromFile(File* from, Client* to) override;
 };

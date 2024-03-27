@@ -47,8 +47,11 @@ void SemaphoreFile::close(void) {
 bool SemaphoreFile::exists(void) {
   bool result = false;
   if (_fs) {
-    result = _fs->exists(_path);
+    File file = _fs->open(_path, "r");
+    if (file && !file.isDirectory()) {
+      result = true;
+    }
+    file.close();
   }
-  xSemaphoreGive(_semaphore);
   return result;
 }

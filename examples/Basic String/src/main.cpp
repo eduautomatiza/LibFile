@@ -27,7 +27,7 @@ void setup(void) {
   FILESYSTEM.begin(true, "/spiffs");
 
   if (!config_file.exists()) {
-    String txt = "Conteúdo do arquivo stream";
+    String txt = "Conteúdo do arquivo string";
     string_file.save(&txt);
   }
 

@@ -17,22 +17,14 @@
 #include <ArduinoJson.h>
 #include <SemaphoreFile.h>
 
-#include <TransferFile.hpp>
+#include <CopyFile.hpp>
 
-class JsonFile : protected TransferRead<JsonDocument>,
-                 protected TransferWrite<JsonDocument> {
+class JsonFile : public CopyFile<JsonDocument> {
  public:
   explicit JsonFile(SemaphoreFile* file);
-
-  bool save(JsonDocument* json);
-  bool load(JsonDocument* json);
   JsonDocument toJsonDocument(void);
-
- private:
-  SemaphoreFile* _file;
-
-  virtual bool transferWriteData(JsonDocument* from, File* to) override;
-  virtual bool transferReadData(File* from, JsonDocument* to) override;
+  bool toFile(JsonDocument* from, File* to) override;
+  bool fromFile(File* from, JsonDocument* to) override;
 };
 
 #endif

@@ -13,20 +13,12 @@
 #include <Arduino.h>
 #include <SemaphoreFile.h>
 
-#include <TransferFile.hpp>
+#include <CopyFile.hpp>
 
-class StringFile : protected TransferRead<String>,
-                   protected TransferWrite<String> {
+class StringFile : public CopyFile<String> {
  public:
   explicit StringFile(SemaphoreFile* file);
-
-  bool save(String* str);
-  bool load(String* str);
   String toString();
-
- private:
-  SemaphoreFile* _file;
-
-  virtual bool transferWriteData(String* from, File* to) override;
-  virtual bool transferReadData(File* from, String* to) override;
+  bool toFile(String* from, File* to) override;
+  bool fromFile(File* from, String* to) override;
 };

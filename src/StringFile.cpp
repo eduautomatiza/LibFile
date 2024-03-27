@@ -10,11 +10,7 @@
  */
 #include "StringFile.h"
 
-StringFile::StringFile(SemaphoreFile* file) : _file(file) {}
-
-bool StringFile::save(String* str) { return transferWrite(str, _file); }
-
-bool StringFile::load(String* str) { return transferRead(_file, str); }
+StringFile::StringFile(SemaphoreFile* file) : CopyFile<String>(file) {}
 
 String StringFile::toString() {
   String to;
@@ -22,7 +18,7 @@ String StringFile::toString() {
   return to;
 }
 
-bool StringFile::transferWriteData(String* from, File* to) {
+bool StringFile::toFile(String* from, File* to) {
   bool result = false;
   if (to->print(*from) == from->length()) {
     result = true;
@@ -30,7 +26,7 @@ bool StringFile::transferWriteData(String* from, File* to) {
   return result;
 }
 
-bool StringFile::transferReadData(File* from, String* to) {
+bool StringFile::fromFile(File* from, String* to) {
   bool result = false;
   if (to->reserve(from->size() + 1)) {
     uint8_t buffer[128];

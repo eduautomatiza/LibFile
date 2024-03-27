@@ -10,13 +10,9 @@
  */
 #include "ClientFile.h"
 
-ClientFile::ClientFile(SemaphoreFile* file) : _file(file) {}
+ClientFile::ClientFile(SemaphoreFile* file) : CopyFile<Client>(file) {}
 
-bool ClientFile::load(Client* str) {
-  return transferRead(_file, str);
-}
-
-bool ClientFile::transferReadData(File* from, Client* to) {
+bool ClientFile::fromFile(File* from, Client* to) {
   bool result = false;
   if (to->write(*from) == from->size()) result = true;
   return result;

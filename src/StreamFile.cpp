@@ -10,13 +10,9 @@
  */
 #include "StreamFile.h"
 
-StreamFile::StreamFile(SemaphoreFile* file) : _file(file) {}
+StreamFile::StreamFile(SemaphoreFile* file) : CopyFile<Stream>(file) {}
 
-bool StreamFile::save(Stream* str) { return transferWrite(str, _file); }
-
-bool StreamFile::load(Stream* str) { return transferRead(_file, str); }
-
-bool StreamFile::transferWriteData(Stream* from, File* to) {
+bool StreamFile::toFile(Stream* from, File* to) {
   bool result = false;
   size_t size = 0;
   uint8_t buffer[128];
@@ -31,7 +27,7 @@ bool StreamFile::transferWriteData(Stream* from, File* to) {
   return result;
 }
 
-bool StreamFile::transferReadData(File* from, Stream* to) {
+bool StreamFile::fromFile(File* from, Stream* to) {
   bool result = false;
   size_t size = 0;
   uint8_t buffer[128];

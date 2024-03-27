@@ -13,19 +13,11 @@
 #include <Arduino.h>
 #include <SemaphoreFile.h>
 
-#include <TransferFile.hpp>
+#include <CopyFile.hpp>
 
-class StreamFile : protected TransferRead<Stream>,
-                   protected TransferWrite<Stream> {
+class StreamFile : public CopyFile<Stream> {
  public:
   explicit StreamFile(SemaphoreFile* file);
-
-  bool save(Stream* from);
-  bool load(Stream* to);
-
- private:
-  SemaphoreFile* _file;
-
-  bool transferWriteData(Stream* from, File* to) override;
-  bool transferReadData(File* from, Stream* to) override;
+  bool toFile(Stream* from, File* to) override;
+  bool fromFile(File* from, Stream* to) override;
 };

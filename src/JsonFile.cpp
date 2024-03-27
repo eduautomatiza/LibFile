@@ -13,11 +13,7 @@
 
 #include "JsonFile.h"
 
-JsonFile::JsonFile(SemaphoreFile* file) : _file(file) {}
-
-bool JsonFile::save(JsonDocument* json) { return transferWrite(json, _file); }
-
-bool JsonFile::load(JsonDocument* json) { return transferRead(_file, json); }
+JsonFile::JsonFile(SemaphoreFile* file) : CopyFile<JsonDocument>(file) {}
 
 JsonDocument JsonFile::toJsonDocument(void) {
   JsonDocument to;
@@ -25,7 +21,7 @@ JsonDocument JsonFile::toJsonDocument(void) {
   return to;
 }
 
-bool JsonFile::transferWriteData(JsonDocument* from, File* to) {
+bool JsonFile::toFile(JsonDocument* from, File* to) {
   ;
   bool result = false;
   serializeJson(*from, *to);
@@ -33,7 +29,7 @@ bool JsonFile::transferWriteData(JsonDocument* from, File* to) {
   return result;
 }
 
-bool JsonFile::transferReadData(File* from, JsonDocument* to) {
+bool JsonFile::fromFile(File* from, JsonDocument* to) {
   bool result = false;
   if (deserializeJson(*to, *from) == DeserializationError::Ok) {
     result = true;
