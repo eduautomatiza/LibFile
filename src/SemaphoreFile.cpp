@@ -3,7 +3,7 @@
  * @author Eduardo Guse (eduautomatiza@yahoo.com.br)
  * @brief SemaphoreFile class for secure file access in an embedded system,
  * using semaphores to ensure exclusive access during read and write.
- * @version 0.0.1
+ * @version 0.0.2
  * @date 2024-03-21
  *
  * @copyright Copyright (c) 2024

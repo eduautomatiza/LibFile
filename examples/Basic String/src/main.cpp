@@ -2,7 +2,7 @@
  * @file main.cpp
  * @author Eduardo Guse (eduautomatiza@yahoo.com.br)
  * @brief
- * @version 0.1
+ * @version 0.0.2
  * @date 2024-03-18
  *
  * @copyright Copyright (c) 2024
